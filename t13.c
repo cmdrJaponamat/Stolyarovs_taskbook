@@ -18,31 +18,33 @@ char *get_arr_from_num(int num){
         str_of_num[cnt-i-1] = buf;
     }
     cnt = 0;
+    // printf("%s\n", str_of_num);
     return str_of_num;
 }
 
-char *sum_of_arr(char *str_of_num, int *cnt){
-    char *end_str;
+int sum_of_arr(char *str_of_num, int *cnt, char *end_str){
+    int i = -1;
     (*cnt)--;
-    end_str = (char *)malloc(1024);
     do{
+        i++;
         (*cnt)++;
-        end_str[*cnt] = str_of_num[*cnt];
-    } while(str_of_num[*cnt]!='\0');
-    return end_str;
+        end_str[*cnt] = str_of_num[i];
+    } while(str_of_num[i]!='\0');
+    return 0;
 }
 
 int main(int argc, char **argv){
     int cnt = 0, sqr = 0;
     int n = atoi(*(argv+1)), m = atoi(*(argv+2));
     char *end_str;
+    end_str = (char *)malloc(1024);
     printf("%d, %d\n", n, m);
     for (int i = 1; i<=n; i++){
         sqr = i*i;
-        end_str = sum_of_arr(get_arr_from_num(sqr), &cnt);
+        sum_of_arr(get_arr_from_num(sqr), &cnt, end_str);
     }
-    // printf("%s", sum_of_arr(get_arr_from_num(n), &cnt));
-    printf("%s\n", end_str);
-    // (1 4 9 16 25 36 49 64 81 100 121 144 169 196 225 256 289 324 361 400 441 484 529 576 625 676 729 784 841 900 961 1024)
+    for (int i = 0; i<m; i++){
+        printf("%c", end_str[i]);
+    }
     return 0;
 }
