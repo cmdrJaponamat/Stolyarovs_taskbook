@@ -2,21 +2,20 @@
 
 char *occurrences(char *first_arg, char *second_arg){
     int first_arg_length = 0;
-    char *position = first_arg, *buf = second_arg;
     do{
-        if (*buf == *position){
-            while(*position++){
+        if (*second_arg == *first_arg){
+            while(*first_arg++){
                 first_arg_length++;
-                buf++;
-                if (*buf == *position){
-                    if (!*position+1){
-                        return buf-first_arg_length;
+                second_arg++;
+                if (*second_arg == *first_arg){
+                    if (!*first_arg+1){
+                        return second_arg-first_arg_length;
                     }
                 }
                 else break;
             }
         }
-    } while (*++buf);
+    } while (*++second_arg);
     return NULL;
 }
 
