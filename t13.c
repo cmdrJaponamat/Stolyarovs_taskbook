@@ -18,33 +18,39 @@ char *get_arr_from_num(int num){
         str_of_num[cnt-i-1] = buf;
     }
     cnt = 0;
-    // printf("%s\n", str_of_num);
+    free(str_of_num);
     return str_of_num;
 }
 
-int sum_of_arr(char *str_of_num, int *cnt, char *end_str){
+int sum_of_arr(char *str_of_num, int *cnt, char *end_str, int *n, int *inacuracy, int *str_cnt){
     int i = -1;
-    (*cnt)--;
+    (*str_cnt)--;
     do{
         i++;
         (*cnt)++;
-        end_str[*cnt] = str_of_num[i];
+        if (*cnt >= *n){
+            end_str[*str_cnt] = str_of_num[i];
+            (*str_cnt)++;
+        }
     } while(str_of_num[i]!='\0');
     return 0;
 }
 
 int main(int argc, char **argv){
-    int cnt = 0, sqr = 0;
+    int cnt = 0, inacuracy = 0, str_cnt = 0;
+    long long sqr = 0;
     int n = atoi(*(argv+1)), m = atoi(*(argv+2));
     char *end_str;
-    end_str = (char *)malloc(1024);
+    end_str = (char *)malloc(1000000000);
     printf("%d, %d\n", n, m);
-    for (int i = 1; i<=n; i++){
+    for (int i = 1; cnt <= m; i++){
         sqr = i*i;
-        sum_of_arr(get_arr_from_num(sqr), &cnt, end_str);
+        sum_of_arr(get_arr_from_num(sqr), &cnt, end_str, &n, &inacuracy, &str_cnt);
     }
-    for (int i = 0; i<m; i++){
+    for (int i = 1; i<m-n; i++){
         printf("%c", end_str[i]);
     }
+    printf("\n%s", end_str);
+    free(end_str);
     return 0;
 }
