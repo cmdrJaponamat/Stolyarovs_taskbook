@@ -1,3 +1,5 @@
+/*array to list to array with cnt in array[0]*/
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -26,7 +28,7 @@ struct list
 struct list *list_fu(int cnt, int *arr){
     struct list *tmp = malloc(sizeof(tmp));
     if (!cnt)
-        return NULL; 
+        return NULL;
     tmp->num = *arr;
     tmp->next = list_fu(cnt-1, arr+1);
     return tmp;
@@ -35,19 +37,17 @@ struct list *list_fu(int cnt, int *arr){
 int *list_to_arr(struct list *list){
     int *array = (int*)malloc(sizeof(int));
     for (int i = 1; list; i++){
-        array = (int*)realloc(array, i*sizeof(int));
+        array = (int*)realloc(array, (i+1)*sizeof(int));
         array[i] = list->num;
         array[0] = i;
         list = list->next;
-        printf("%d ", array[i]);
     }
     return array;
 }
 
 int main(){
-    int arr[] = {1,2,3,4,5,6,7,8}, cnt = 8;
+    int arr[] = {1,2,3,45,5,6,7,8}, cnt = 8;
     int *array = list_to_arr(list_fu(cnt, arr));
-    printf("\n");
     for (int i = 0; i<=array[0]; i++){
         printf("%d ", array[i]);
     }
