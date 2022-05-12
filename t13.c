@@ -1,3 +1,5 @@
+/*To print area of numbers of square of natural numbers*/
+
 #include <stdio.h>
 #include <stdlib.h>
 

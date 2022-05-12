@@ -1,3 +1,5 @@
+/*To find occurences and cnt one str in second*/
+
 #include <stdio.h>
 
 char *occurrences(char *first_arg, char *second_arg){

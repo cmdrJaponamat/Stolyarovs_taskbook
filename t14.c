@@ -1,3 +1,5 @@
+/*func to del space at str without copy with one circle*/
+
 #include <stdio.h>
 
 int space_dltr(char *str){
