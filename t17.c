@@ -24,29 +24,21 @@ struct list
 // }
 
 struct list *list_fu(int cnt, int *arr){
-    struct list *tmp;
+    struct list *tmp = malloc(sizeof(tmp));
     if (!cnt)
         return NULL; 
-    tmp = malloc(sizeof(tmp));
     tmp->num = *arr;
     tmp->next = list_fu(cnt-1, arr+1);
     return tmp;
 }
 
 int *list_to_arr(struct list *list){
-    struct list *temp;
-    temp = list;
-    int cnt = 0;
-    while (temp){
-        cnt++;
-        temp = temp->next;
-    }
-    temp = list;
-    int *array = (int*)malloc((cnt+1)*sizeof(int));
-    array[0] = cnt;
-    for (int i = 1; i<=cnt; i++){
-        array[i] = temp->num;
-        temp = temp->next;
+    int *array = (int*)malloc(sizeof(int));
+    for (int i = 1; list; i++){
+        array = (int*)realloc(array, i*sizeof(int));
+        array[i] = list->num;
+        array[0] = i;
+        list = list->next;
         printf("%d ", array[i]);
     }
     return array;
@@ -59,5 +51,6 @@ int main(){
     for (int i = 0; i<=array[0]; i++){
         printf("%d ", array[i]);
     }
+    free(array);
     return 0;
 }
