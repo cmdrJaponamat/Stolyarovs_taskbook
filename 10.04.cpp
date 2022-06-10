@@ -23,10 +23,27 @@ public:
             i[j][j] = 1;
         }
     }
-    M operator+(M m2) const
+    M(const M& m)
     {
-        for (int c = 1; c <= 3; c++){
-            for (int j = 1; j <= 3; j++)
+        i = new int*[3];
+        for (int c = 0; c <= 3; c++){
+            i[c] = new int[3];
+            for (int j = 0; j <= 3; j++){
+                i[c][j] = m.i[c][j];
+            }
+        }
+        for (int c = 0; c <= 3; c++){
+            for (int j = 0; j <= 3; j++){
+                std::cout<<i[c][j]<<std::endl;
+            }
+        }
+    }
+    int **Get() const {return i;}
+
+    M operator+(const M& m2) const
+    {
+        for (int c = 0; c <= 3; c++){
+            for (int j = 0; j <= 3; j++)
                 m2.i[c][j] += i[c][j];
         }
         return m2;
@@ -37,6 +54,12 @@ public:
         int y = j.GetY();
         return i[x][y]; 
     }
+    ~M()
+    {
+        for (int c = 0; c <= 3; c++)
+            delete [] i[c];
+//        delete [] i;
+    }
 };
 
 int main()
@@ -46,7 +69,8 @@ int main()
     M m2;
     m1[I(2,3)] = 7;
     m2[I(2,3)] = 350;
-    M m3(m1 + m2);
+    M m3 = m2 + m1;
+//    M m3(m2);
     std::cout<<m3[I(1,1)]<<" "<<m3[I(2,2)]<<" "<<m3[I(2,3)]<<std::endl;
     return 0;
 }
